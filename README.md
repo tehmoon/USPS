@@ -44,3 +44,68 @@ TBD
 ```
 connection established -> protocol detection -> host:port destination parsing -> allow/block list check -> proxy
 ```
+
+# Configuration
+
+```
+modules:
+  http_proxy:
+    port: 3128
+    intercept_tls: false
+
+# list of host: ip that you can use in conjuction of service discovery
+# Use the FQDN if you want to add a regex domain
+static_hosts:
+  web1: 172.17.0.5
+  web2: 172.17.0.6
+sources:
+  marketing:
+  - 172.16.59/24
+destinations:
+  facebook_443:
+  - hostnames:
+    - $facebook\.com^
+    - $faceblick\.com^
+    ports:
+    - 443
+
+# A source has the following types:
+# - cidr (default): simply CIDR that is checked against the tcp source packet
+# - hostname: regex translation of the ip address to a name. Useful for auto discovery
+
+# A destination is either:
+# - cidr (default when string)
+# - a regex hostname
+# - an object Destination:
+#   - hosts: array of regex hostnames
+#   - ports: array of ports
+allow:
+- sources: marketing
+  destinations: facebook_443
+  modules:
+  - http_proxy
+- sources:
+  - 127.0.0.1/32
+  - web1
+  - web2
+  destinations:
+  - hostnames:
+    - $google\.com^
+    ports:
+    - 443
+# By default, all modules are matching
+  modules:
+  - http_proxy
+
+# Flow:
+# - check allow list
+#   - in: proceed
+#   - not in: fail
+# - check deny list
+#   - in: fail
+#   - no in: proceed
+deny:
+- destinations:
+  - $facebook\.com^
+  - 127.0.0.1/32
+```
