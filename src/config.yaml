@@ -35,8 +35,10 @@ destinations:
 #   - hosts: array of regex hostnames
 #   - ports: array of ports
 allow:
-- sources: marketing
-  destinations: facebook_443
+- sources:
+  - marketing
+  destinations:
+  - facebook_443
   modules:
   - http_proxy
 - sources:
