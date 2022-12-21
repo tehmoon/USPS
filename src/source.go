@@ -13,9 +13,9 @@ type Source struct {
 }
 
 type SourceConfig struct {
-	CIDR []string `json:"cidr"`
-	Hosts []string `json:"hosts"`
-	Modules []string `json:"modules"`
+	CIDR []string `yaml:"cidr"`
+	Hosts []string `yaml:"hosts"`
+	Modules []string `yaml:"modules"`
 }
 
 func NewSource(conf *SourceConfig) (*Source, error) {

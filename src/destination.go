@@ -11,8 +11,8 @@ type Destination struct {
 }
 
 type DestinationConfig struct {
-	Hostnames []string
-	Ports []int64 // Maybe have this as port range
+	Hostnames []string `yaml:"hostnames"`
+	Ports []int64 `yaml:"ports"` // Maybe have this as port range
 }
 
 const (

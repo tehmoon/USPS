@@ -18,7 +18,7 @@ sources:
     - http_proxy
 destinations:
   facebook_443:
-  - hostnames:
+    hostnames:
     - $facebook\.com^
     - $faceblick\.com^
     ports:
@@ -64,7 +64,7 @@ allow:
 #   - not in: fail
 # - check deny list
 #   - in: fail
-#   - no in: proceed
+#   - not in: proceed
 deny:
 - destinations:
   - $facebook\.com^

@@ -1,0 +1,5 @@
+github.com/tehmoon/errors v0.0.0-20180201021944-5629da027d36 h1:u4xOdOK8MSU/fXIJmMOJ28BNbZB62FsgYoOf/E19a3s=
+github.com/tehmoon/errors v0.0.0-20180201021944-5629da027d36/go.mod h1:V8t0Ou0fzGGyqoxD3Cn2C1QAmNyvV+D7A/rVSNoLCRY=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/yaml.v2 v2.4.0 h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=
+gopkg.in/yaml.v2 v2.4.0/go.mod h1:RDklbk79AGWmwhnvt/jBztapEOGDOx6ZbXqjP6csGnQ=

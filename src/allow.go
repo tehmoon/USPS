@@ -4,18 +4,19 @@ import (
 	"github.com/tehmoon/errors"
 )
 
-type AllowRule struct {
+type Rule struct {
 	Sources []*Source
 	Destinations []*Destination
 }
 
-type AllowRuleConfig struct {
-	Sources []interface{} // Can either be a string or a Source
-	Destinations []interface{} // Can either be a string or a Destination
+type RuleConfig struct {
+	Sources []interface{} `yaml:"sources"` // Can either be a string or a Source
+	Destinations []interface{} `yaml:"destinations"` // Can either be a string or a Destination
+	Modules []string `yaml:"modules"`
 }
 
-func NewAllowRule(config *Config, rule *AllowRuleConfig) (*AllowRule, error) {
-	ar := &AllowRule{
+func NewRule(config *Config, rule *RuleConfig) (*Rule, error) {
+	r := &Rule{
 		Sources: make([]*Source, 0),
 		Destinations: make([]*Destination, 0),
 	}
@@ -29,7 +30,7 @@ func NewAllowRule(config *Config, rule *AllowRuleConfig) (*AllowRule, error) {
 					return nil, errors.Errorf("Allow source %q #%d is not found", name, i)
 				}
 
-				ar.Sources = append(ar.Sources, src)
+				r.Sources = append(r.Sources, src)
 			//TODO: handle this
 			//case []*Source:
 			default:
@@ -37,7 +38,7 @@ func NewAllowRule(config *Config, rule *AllowRuleConfig) (*AllowRule, error) {
 		}
 	}
 
-	if len(rule.Sources) == 0 {
+	//if len(rule.Sources) == 0 {
 //TODO: add default rule when not found
 
 	for i, destination := range rule.Destinations {
@@ -49,7 +50,7 @@ func NewAllowRule(config *Config, rule *AllowRuleConfig) (*AllowRule, error) {
 					return nil, errors.Errorf("Allow destination %q #%d is not found", name, i)
 				}
 
-				ar.Destinations = append(ar.Destinations, dst)
+				r.Destinations = append(r.Destinations, dst)
 			//TODO: handle this
 			//case []*Destination:
 			default:
@@ -57,5 +58,5 @@ func NewAllowRule(config *Config, rule *AllowRuleConfig) (*AllowRule, error) {
 		}
 	}
 
-	return ar, nil
+	return r, nil
 }
